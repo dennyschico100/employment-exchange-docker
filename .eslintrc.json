@@ -53,10 +53,10 @@
     "import/imports-first": "warn",
     "no-multi-spaces": "warn",
     "no-multiple-empty-lines": "warn",
-    "linebreak-style": ["error", "windows"],
     "indent": ["off", "tab", { "SwitchCase": 2 }],
     "flowtype/define-flow-type": "warn",
     "flowtype/use-flow-type": "warn",
-    "global-require": "off"
+    "global-require": "off",
+    "linebreak-style": 0
   }
 }
