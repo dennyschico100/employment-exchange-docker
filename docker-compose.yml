@@ -1,0 +1,25 @@
+version: '3'
+services:
+  jobs-server:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    environment:
+      - VERSION=${VERSION}
+      - MONGO_DIR=${EMPLOYMENT_SERVER_MONGO_DIR}
+      - MONGO_PORT=${EMPLOYMENT_SERVER_MONGO_PORT}
+      - MONGO_DB=${EMPLOYMENT_SERVER_MONGO_DB}
+      - PORT=${EMPLOYMENT_SERVER_PORT}
+    depends_on:
+      - employmentdb
+    ports:
+      - ${EMPLOYMENT_SERVER_PORT}:4000
+    volumes:
+      - '${PERSISTENCE_DIR}/var/log/employment:/var/log/employment'
+  employmentdb:
+    image: mongo:4.4.0
+    volumes:
+      - '${PERSISTENCE_DIR}/db-data:/data/employmentdb'
+      - '${PERSISTENCE_DIR}/configs:/docker-entrypoint-initdb.d/mongo-init.js:ro'
+    ports:
+      - 27017:27017

@@ -26,12 +26,13 @@
     "import/no-dynamic-require": "off",
     "import/prefer-default-export": "off",
     "no-use-before-define": "off",
-    "promise/param-names": "error",
-    "promise/catch-or-return": "error",
+    "promise/param-names": "warn",
+    "promise/catch-or-return": "wann",
     "promise/no-native": "off",
     "jsx-a11y/label-has-associated-control": "off",
     "class-methods-use-this": "off",
     "no-duplicate-imports": "error",
+    "one-var": ["error", "always"],
     "no-param-reassign": "error",
     "no-plusplus": "off",
     "no-bitwise": "off",
@@ -52,11 +53,13 @@
     "quotes": ["error", "single", { "avoidEscape": true }],
     "import/imports-first": "warn",
     "no-multi-spaces": "warn",
-    "no-multiple-empty-lines": "warn",
+    "no-multiple-empty-lines": "off",
     "indent": ["off", "tab", { "SwitchCase": 2 }],
     "flowtype/define-flow-type": "warn",
     "flowtype/use-flow-type": "warn",
     "global-require": "off",
-    "linebreak-style": 0
+    "linebreak-style": "off",
+    "operator-linebreak": "off"
+
   }
 }
