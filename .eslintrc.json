@@ -27,7 +27,7 @@
     "import/prefer-default-export": "off",
     "no-use-before-define": "off",
     "promise/param-names": "warn",
-    "promise/catch-or-return": "wann",
+    "promise/catch-or-return": "warn",
     "promise/no-native": "off",
     "jsx-a11y/label-has-associated-control": "off",
     "class-methods-use-this": "off",

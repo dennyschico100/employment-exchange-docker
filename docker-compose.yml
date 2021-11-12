@@ -13,13 +13,14 @@ services:
     depends_on:
       - employmentdb
     ports:
-      - ${EMPLOYMENT_SERVER_PORT}:4000
+      - ${EMPLOYMENT_SERVER_PORT}:${EMPLOYMENT_SERVER_PORT}
     volumes:
       - '${PERSISTENCE_DIR}/var/log/employment:/var/log/employment'
   employmentdb:
     image: mongo:4.4.0
     volumes:
-      - '${PERSISTENCE_DIR}/db-data:/data/employmentdb'
-      - '${PERSISTENCE_DIR}/configs:/docker-entrypoint-initdb.d/mongo-init.js:ro'
+      - emp_mongovolume:/data/db
     ports:
       - 27017:27017
+volumes:
+  emp_mongovolume:
