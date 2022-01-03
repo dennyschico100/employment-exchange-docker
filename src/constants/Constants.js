@@ -12,7 +12,12 @@ const { PORT } = process.env;
 const { FULL_URL } = process.env;
 const MONGO_URL = `${MONGO_DIR}:${MONGO_PORT}/${MONGO_DB}`;
 
-const USER_TYPES = {};
+const USER_TYPES = {
+  // Permisos para Usuarios
+  Read_Users: 'Read_Users',
+  Write_Users: 'Write_Users',
+  Delete_Users: 'Delete_Users',
+};
 
 const { Admin } = USER_TYPES;
 
@@ -37,6 +42,13 @@ module.exports = {
     FIRST_NAME: 'NOMBRE',
     LAST_NAME: 'APELLIDO',
     EXPIRATION_DATE: 'EXPIRATION DATE',
+  },
+  VALIDATION_TYPES: {
+    TOKEN_MATCHES_USER_ID: 'tokenMatchesUserId',
+    IS_ARRAY: 'isArray',
+    IS_STRING: 'isString',
+    IS_BOOLEAN: 'isBoolean',
+    IS_PASSWORD: 'isPassword',
   },
 
   MONGO_URL,

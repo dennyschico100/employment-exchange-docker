@@ -335,15 +335,6 @@ const _doValidate = function (param, isHead) {
         case IS_BOOLEAN:
           validation = validateIsBoolean(validation, param);
           break;
-        case IS_TEMPLATE_DATA:
-          validation = validateTemplateData(validation, param);
-          break;
-        case IS_TEMPLATE_DATA_TYPE:
-          validation = validateTemplateDataType(validation);
-          break;
-        case IS_TEMPLATE_DATA_VALUE:
-          validation = validateValueTypes(validation, param);
-          break;
 
         default:
           throw new Error('Should not drop in default case');

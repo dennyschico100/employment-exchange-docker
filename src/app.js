@@ -4,6 +4,7 @@ const cors = require('cors');
 const morgan = require('morgan');
 const Messsages = require('./constants/Messages');
 const Constants = require('./constants/Constants');
+const UserRoutes = require('./routes/UserRoutes');
 
 const app = new express();
 app.use(express.json());
@@ -14,5 +15,5 @@ app.set('PORT', process.env.port || 3000);
 app.get('/', (_, res) => {
   res.send(`${Messsages.INDEX.MSG.HELLO_WORLD} v${Constants.API_VERSION}`);
 });
-
+app.use('/users', UserRoutes);
 module.exports = app;

@@ -184,5 +184,34 @@ module.exports = {
         message: `El campo ${field} es incorrecto, se esperaba un texto.`,
       });
     },
+    LENGTH_INVALID(field, min, max) {
+      const code = 'PARAMETER_TYPE_ERROR';
+      const msgStart = `El campo ${field} tendria que tener.`;
+
+      if (min && !max) {
+        return new CodeError({
+          code,
+          message: `${msgStart} mas que ${min} caracteres.`,
+        });
+      }
+
+      if (!min && max) {
+        return new CodeError({
+          code,
+          message: `${msgStart} menos que ${max} caracteres.`,
+        });
+      }
+
+      if (min === max) {
+        return new CodeError({
+          code,
+          message: `${msgStart} exactamente ${max} caracteres.`,
+        });
+      }
+      return new CodeError({
+        code,
+        message: `${msgStart} entre ${min} y ${max} caracteres.`,
+      });
+    },
   },
 };
