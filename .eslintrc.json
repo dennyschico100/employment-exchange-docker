@@ -32,7 +32,11 @@
     "jsx-a11y/label-has-associated-control": "off",
     "class-methods-use-this": "off",
     "no-duplicate-imports": "error",
-    "one-var": ["error", "always"],
+    "one-var": [2, {
+    "var": "always", // Exactly one var declaration per function
+    "let": "always", // Exactly one let declaration per block
+    "const": "never" // Exactly one declarator per const declaration per block
+}],
     "no-param-reassign": "error",
     "no-plusplus": "off",
     "no-bitwise": "off",

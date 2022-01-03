@@ -17,24 +17,21 @@ const USER_TYPES = {};
 const { Admin } = USER_TYPES;
 
 const STATUS = {};
-
+const CERT_FIELD_TYPES = {
+  Text: 'Text',
+  Paragraph: 'Paragraph',
+  Date: 'Date',
+  Number: 'Number',
+  Boolean: 'Boolean',
+  Checkbox: 'Checkbox',
+};
 module.exports = {
   API_VERSION: '1.0',
   DEBUGG,
-
   COMMON_PASSWORDS: ['123456', 'contraseña', 'password'],
   PASSWORD_MIN_LENGTH: 6,
-  SALT_WORK_FACTOR: 16,
-
-  PREVIEW_ELEMS_LENGTH: {
-    1: 2,
-    2: 4,
-    3: 6,
-    4: 6,
-  },
-
   USER_TYPES,
-
+  CERT_FIELD_TYPES,
   USER_FIELD_MANDATORY: {
     NAME: 'CREDENCIAL',
     FIRST_NAME: 'NOMBRE',
@@ -46,6 +43,5 @@ module.exports = {
   PORT,
   ADDRESS,
   FULL_URL,
-
   ENABLE_INSECURE_ENDPOINTS,
 };
