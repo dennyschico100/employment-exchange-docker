@@ -14,11 +14,11 @@ class ResponseHandler {
   // mandar respuesta exitosa generica
   static sendRes(res, data) {
     res.type('application/json');
-    if (Constants.DEBUGG)
-      return res.json({
-        status: 'success',
-        data,
-      });
+    //if (Constants.DEBUGG)
+    return res.json({
+      status: 'success',
+      data,
+    });
   }
 
   // mandar respuesta de error generica

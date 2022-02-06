@@ -1,10 +1,39 @@
 const router = require('express').Router();
 const Constants = require('../constants/Constants');
 const Validator = require('../utils/Validator');
+const UserModel = require('../models/User');
+
+const {
+  sendRes,
+  sendErrWithStatus,
+  sendErr,
+} = require('../utils/ResponseHandler');
+
 router.get('/', (req, res) => {
   res.json({ message: 'all users' });
 });
 
+router.post('/', async (req, res) => {
+  try {
+    console.log('guardando usuario');
+    const NEW_USER = {
+      nombres: 'juan951',
+      apellidos: 'perez',
+      email: 'perez@gmail.com',
+      password: '',
+      confirmedpassword: '',
+      nacionalidad: '',
+      telefono: '',
+      estado: 1,
+    };
+    const result = await UserModel.create(NEW_USER);
+    return sendRes(res, result);
+  } catch (error) {
+    console.log(error);
+    return sendErr(res, error);
+  }
+});
+/*
 router.post(
   '/',
   Validator.validate([
@@ -27,6 +56,12 @@ router.post(
     },
   ]),
   Validator.checkValidationResult,
-  (req, res) => {}
-);
+  async (req, res) => {
+    try {
+      sendRes(res, {});
+    } catch (error) {
+      sendErr(res.err);
+    }
+  }
+); */
 module.exports = router;
