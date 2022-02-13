@@ -10,6 +10,8 @@ const { ENABLE_INSECURE_ENDPOINTS } = process.env;
 const { ADDRESS } = process.env;
 const { PORT } = process.env;
 const { FULL_URL } = process.env;
+const { HASH_SALT } = process.env;
+
 const MONGO_URL = `${MONGO_DIR}:${MONGO_PORT}/${MONGO_DB}`;
 
 const USER_TYPES = {
@@ -55,5 +57,6 @@ module.exports = {
   PORT,
   ADDRESS,
   FULL_URL,
+  HASH_SALT,
   ENABLE_INSECURE_ENDPOINTS,
 };

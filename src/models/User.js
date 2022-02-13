@@ -1,5 +1,7 @@
 const { Schema, model } = require('mongoose');
 const bcrypt = require('bcryptjs');
+const Hashing = require('./utils/Hashing');
+const HashedData = require('./utils/HashedData');
 
 const userSchema = new Schema({
   nombres: { type: String },
@@ -7,11 +9,10 @@ const userSchema = new Schema({
   email: {
     type: String,
   },
-  password: { type: String },
-  confirmedpassword: { type: String },
+  password: HashedData,
   nacionalidad: { type: String },
   telefono: { type: Number },
-  estado: { type: Number },
+  deleted: { type: Boolean, default: false },
 });
 userSchema.statics.encryptPassword = async (password) => {
   const salt = await bcrypt.genSalt(10);
@@ -24,3 +25,32 @@ userSchema.statics.comparePassword = async (password, receivedPassword) => {
 };
 const UserModel = model('User', userSchema);
 module.exports = UserModel;
+
+UserModel.generate = async ({
+  nombres,
+  apellidos,
+  email,
+  password,
+  nacionalidad,
+  telefono,
+}) => {
+  try {
+    let user;
+    const query = { email, deleted: false };
+    user = await UserModel.findOne(query);
+
+    if (!user) user = new UserModel();
+    user.nombres = nombres;
+    user.apellidos = apellidos;
+    user.email = email;
+    user.nombres = nombres;
+    user.password = await Hashing.saltedHash(password);
+    user.nacionalidad = nacionalidad;
+    user.telefono = telefono;
+    user = await user.save();
+    return user;
+  } catch (error) {
+    console.log(`[User - generate ] JSON.stringify(err)`);
+    throw error;
+  }
+};

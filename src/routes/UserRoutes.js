@@ -2,6 +2,7 @@ const router = require('express').Router();
 const Constants = require('../constants/Constants');
 const Validator = require('../utils/Validator');
 const UserModel = require('../models/User');
+const UserService = require('../services/UserService');
 
 const {
   sendRes,
@@ -26,9 +27,22 @@ router.post('/', async (req, res) => {
       telefono: '',
       estado: 1,
     };
-    const result = await UserModel.create(NEW_USER);
+    const newUser = {
+      nombres: req.body.nombres,
+      apellidos: req.body.apellidos,
+      email: req.body.email,
+      password: req.body.password,
+      confirmedpassword: req.body.confirmedPassword,
+      nacionalidad: req.body.nacionalidad,
+      telefono: req.body.telefono,
+    };
+    console.log(newUser);
+    //const result = await UserModel.create(newUser);
+    //const res = await
+    const result = await UserService.create(newUser);
     return sendRes(res, result);
   } catch (error) {
+    console.log('en el catch del routes');
     console.log(error);
     return sendErr(res, error);
   }
