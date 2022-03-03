@@ -102,6 +102,10 @@ module.exports = {
         code: 'UNIQUE_NAME',
         message: 'El nombre del usuario ya existe.',
       }),
+      UNIQUE_EMAIL: new CodeError({
+        code:'UNIQUE_EMAIL',
+        message:'El email proporcionado ya existe'
+      }),
       DELETE: new CodeError({
         code: 'USER_DELETE',
         message: 'El modelo de usuario no pudo ser borrado.',

@@ -10,8 +10,12 @@ const userSchema = new Schema({
     type: String,
   },
   password: HashedData,
-  nacionalidad: { type: String },
+  pais: { type: String },
+  departamento: { type: String },
+  municipio: { type: String },
+  genero: { type: String },
   telefono: { type: Number },
+  fecha_nacimiento:{ type: String },
   deleted: { type: Boolean, default: false },
 });
 userSchema.statics.encryptPassword = async (password) => {
@@ -31,8 +35,12 @@ UserModel.generate = async ({
   apellidos,
   email,
   password,
-  nacionalidad,
+  pais,
+  departamento,
+  municipio,
+  genero,
   telefono,
+  fecha_nacimiento,
 }) => {
   try {
     let user;
@@ -45,7 +53,12 @@ UserModel.generate = async ({
     user.email = email;
     user.nombres = nombres;
     user.password = await Hashing.saltedHash(password);
-    user.nacionalidad = nacionalidad;
+    user.pais = pais;
+    user.departamento = departamento;
+    user.municipio = municipio;
+    user.genero = genero;
+    user.fecha_nacimiento= fecha_nacimiento
+    
     user.telefono = telefono;
     user = await user.save();
     return user;

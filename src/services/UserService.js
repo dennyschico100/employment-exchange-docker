@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const UserModel = require('../models/User');
 const Messages = require('../constants/Messages');
+const {USER} = require('../constants/Messages')
 module.exports.login = async (args) => {
   let user = [...args];
 };
@@ -16,6 +17,7 @@ module.exports.create = async (_user) => {
       const res = await UserModel.generate(_user);
       return res;
     }
+    return USER.ERR.UNIQUE_EMAIL;
   } catch (error) {
     console.log('catch del service');
     console.log(error);
