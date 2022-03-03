@@ -96,7 +96,7 @@ module.exports = {
       }),
       GET_NAME: new CodeError({
         code: 'USER_GET_NAME',
-        message: 'El nombre del usurio no pudo ser obtenido.',
+        message: 'El nombre del usuario no pudo ser obtenido.',
       }),
       UNIQUE_NAME: new CodeError({
         code: 'UNIQUE_NAME',
@@ -186,6 +186,12 @@ module.exports = {
       return new CodeError({
         code: 'PARAMETER_TYPE_ERROR',
         message: `El campo ${field} es incorrecto, se esperaba un texto.`,
+      });
+    },
+    EMAIL_FORMAT_INVALID(field) {
+      return new CodeError({
+        code: 'PARAMETER_TYPE_ERROR',
+        message: `El campo ${field} es incorrecto, se esperaba  un email valido.`,
       });
     },
     LENGTH_INVALID(field, min, max) {

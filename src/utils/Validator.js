@@ -1,10 +1,10 @@
-const { header, body, validationResult } = require('express-validator');
+const { header, body, validationResult } = require("express-validator");
 
-const Messages = require('../constants/Messages');
-const Constants = require('../constants/Constants');
-const ResponseHandler = require('./ResponseHandler');
+const Messages = require("../constants/Messages");
+const Constants = require("../constants/Constants");
+const ResponseHandler = require("./ResponseHandler");
 
-const { IS_PASSWORD, IS_STRING, IS_ARRAY, IS_BOOLEAN, IS_CERT_DATA } =
+const { IS_PASSWORD, IS_STRING, IS_ARRAY, IS_BOOLEAN, IS_CERT_DATA, IS_EMAIL } =
   Constants.VALIDATION_TYPES;
 
 // ejecuta validaciones generadas por "validate"
@@ -93,6 +93,11 @@ const _doValidate = function (param, isHead) {
       .isString()
       .withMessage(Messages.VALIDATION.STRING_FORMAT_INVALID(parameter.name));
   };
+  const validateIsEmail = function (validation, parameter) {
+    return validation
+      .isEmail()
+      .withMessage(Messages.VALIDATION.EMAIL_FORMAT_INVALID(parameter.name));
+  };
 
   // valida que el campo sea un array
   const validateIsArray = function (validation, parameter) {
@@ -108,9 +113,9 @@ const _doValidate = function (param, isHead) {
   const validateIsBoolean = function (validation, parameter) {
     return validation.custom(async (value) => {
       if (
-        value === 'true' ||
+        value === "true" ||
         value === true ||
-        value === 'false' ||
+        value === "false" ||
         value === false
       ) {
         return value;
@@ -197,7 +202,7 @@ const _doValidate = function (param, isHead) {
   const validateValueMatchesType = async function (type, value, err) {
     switch (type) {
       case Constants.CERT_FIELD_TYPES.Boolean:
-        if (value !== 'true' && value !== 'false') throw err;
+        if (value !== "true" && value !== "false") throw err;
         break;
       case Constants.CERT_FIELD_TYPES.Date:
         const date = new Date(value);
@@ -216,7 +221,7 @@ const _doValidate = function (param, isHead) {
         break;
       default:
         throw new Error(
-          '[validateValueMatchesType] Should not drop in default value'
+          "[validateValueMatchesType] Should not drop in default value"
         );
     }
     return value;
@@ -236,7 +241,7 @@ const _doValidate = function (param, isHead) {
 
         // sin tipo
         if (!data[0] || !data[0].type)
-          throw new Error('[validateValueTypes] Invalid data type');
+          throw new Error("[validateValueTypes] Invalid data type");
 
         const { type } = data[0];
         for (const dataElement of data) {
@@ -329,6 +334,9 @@ const _doValidate = function (param, isHead) {
         case IS_STRING:
           validation = validateIsString(validation, param);
           break;
+        case IS_EMAIL:
+          validation = validateIsEmail(validation, param);
+          break;
         case IS_ARRAY:
           validation = validateIsArray(validation, param);
           break;
@@ -337,7 +345,7 @@ const _doValidate = function (param, isHead) {
           break;
 
         default:
-          throw new Error('Should not drop in default case');
+          throw new Error("Should not drop in default case");
       }
     });
   }
