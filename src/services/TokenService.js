@@ -17,7 +17,7 @@ module.exports.generateToken = function(userId) {
 
 // valida el token y retorna el userId
 module.exports.getTokenData = function(token) {
-	const decoded = jwt.verify(token);
+	const decoded = jwt.verify(token,secret);
 	if (decoded.exp && decoded.exp > now()) {
 		return { userId: decoded.userId };
 	}

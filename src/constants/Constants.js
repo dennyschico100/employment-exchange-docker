@@ -15,13 +15,12 @@ const {EMPLOYMENT_SERVER_MONGO_DB}= process.env
 const MONGO_URL = `${MONGO_DIR}:${MONGO_PORT}/${MONGO_DB}`;
 
 const USER_TYPES = {
+  Candidate: "Candidate",
   // Permisos para Usuarios
-  Read_Users: "Read_Users",
-  Write_Users: "Write_Users",
-  Delete_Users: "Delete_Users",
+  
 };
 
-const { Admin } = USER_TYPES;
+const { Candidate } = USER_TYPES;
 
 const STATUS = {};
 const CERT_FIELD_TYPES = {

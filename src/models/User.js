@@ -2,7 +2,9 @@ const { Schema, model } = require("mongoose");
 const bcrypt = require("bcryptjs");
 const Hashing = require("./utils/Hashing");
 const HashedData = require("./utils/HashedData");
+const {pino}= require('../utils/logger')
 
+const Messages = require("../constants/Messages")
 const userSchema = new Schema({
   nombres: { type: String },
   apellidos: { type: String },
@@ -16,6 +18,8 @@ const userSchema = new Schema({
   genero: { type: String },
   telefono: { type: Number },
   fecha_nacimiento: { type: String },
+  isCandidate: { type: Boolean },
+  
   deleted: { type: Boolean, default: false },
 });
 userSchema.statics.encryptPassword = async (password) => {
@@ -41,12 +45,14 @@ userSchema.methods.comparePassword = async function(candidatePassword) {
 
 const UserModel = model("User", userSchema);
 module.exports = UserModel;
+
+
 UserModel.getByEmail = async function(email) {
 	try {
 		const res = await UserModel.findOne({ email, deleted: false });
 		return res;
 	} catch (err) {
-		console.log(`[User - getByName]: JSON.stringify(err)`);
+		pino.info(`[User - getByName]: JSON.stringify(err)`);
 		throw err;
 	}
 };
@@ -62,6 +68,7 @@ UserModel.generate = async ({
   genero,
   telefono,
   fecha_nacimiento,
+  isCandidate,
 }) => {
   try {
     let user;
@@ -81,6 +88,7 @@ UserModel.generate = async ({
     user.fecha_nacimiento = fecha_nacimiento;
 
     user.telefono = telefono;
+    user.isCandidate=isCandidate;
     user = await user.save();
     return user;
   } catch (error) {

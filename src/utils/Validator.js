@@ -3,6 +3,8 @@ const { header, body, validationResult } = require("express-validator");
 const Messages = require("../constants/Messages");
 const Constants = require("../constants/Constants");
 const ResponseHandler = require("./ResponseHandler");
+const UserService = require("../services/UserService");
+const TokenService = require("../services/TokenService");
 
 const { IS_PASSWORD, IS_STRING, IS_ARRAY, IS_BOOLEAN, IS_CERT_DATA, IS_EMAIL } =
   Constants.VALIDATION_TYPES;
@@ -23,15 +25,22 @@ module.exports.checkValidationResult = function (req, res, next) {
 // obtiene usuario del token
 const _getUserFromToken = async function (token) {
   try {
+    console.log(" EL TOKEN ");
+    console.log(token);
     const data = TokenService.getTokenData(token);
-    console.log(data);
+    console.log("EL ID RECIBIDO");
+    console.log(data.userId);
     const user = await UserService.getById(data.userId);
     console.log(user);
+    console.log(" EL USSER");
+
     if (!user) throw Messages.VALIDATION.INVALID_TOKEN;
-    if (Constants.DEBUGG) console.log(Messages.VALIDATION.REQUESTER_IS(user));
+    //if (Constants.DEBUGG) console.log(Messages.VALIDATION.REQUESTER_IS(user));
+
     return user;
   } catch (err) {
-    console.log(`[Validator - _getUserFromToken] JSON.stringify(err)`);
+    console.log("EROR AL VALIDAR TOKEN");
+    console.log(err);
     throw Messages.VALIDATION.INVALID_TOKEN;
   }
 };
@@ -55,16 +64,19 @@ const _doValidate = function (param, isHead) {
     return validation.custom(async (token) => {
       try {
         const user = await _getUserFromToken(token);
-        const { profile, isAdmin } = user;
-        const types = profile ? profile.types : [];
+        const { profile, isCandidate } = user[0];
+        console.log("VER SI ES CANDIDATE "+isCandidate)
+        /*const types = profile ? profile.types : [];
         const allowed_roles = Constants.ALLOWED_ROLES[role];
-
-        if (!isAdmin && !types.some((role_) => allowed_roles.includes(role_))) {
+        
+        if (!isCandidate && !types.some((role_) => allowed_roles.includes(role_))) {
+          throw Messages.VALIDATION.ROLES;
+        }*/
+        if (!isCandidate) {
           throw Messages.VALIDATION.ROLES;
         }
         return user;
       } catch (err) {
-        console.error(`[Validator - validateTokenRole]: JSON.stringify(err)`);
         throw err;
       }
     });

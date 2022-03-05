@@ -3,8 +3,7 @@ const Constants = require("../constants/Constants");
 const Validator = require("../utils/Validator");
 const UserModel = require("../models/User");
 const UserService = require("../services/UserService");
-const {pino} = require('../utils/logger')
-
+const { pino } = require("../utils/logger");
 
 const {
   sendRes,
@@ -42,6 +41,7 @@ router.post(
         genero: req.body.genero,
         fecha_nacimiento: req.body.fecha_nacimiento,
         telefono: req.body.telefono,
+        isCandidate: true,
       };
       pino.info(newUser);
 
@@ -54,19 +54,36 @@ router.post(
     }
   }
 );
+router.get(
+  "/admin",
+  Validator.validate([
+    {
+      name: "token",
+      validate: [Constants.USER_TYPES.Candidate ],
+      isHead: true,
+    }
+  ]),
+  Validator.checkValidationResult,
+  async (req, res) => {
+    try {
 
-router.post("/login",async (req,res)=>{
-  try {
-    const {email,password}= req.body
-    pino.error(req.body)
-    const resp= await UserService.login({email,password})
-    
-    return sendRes(res,resp)
-  } catch (error) {
-    pino.error(error)
-
+      return sendRes(res,{message:'TOKEN ACEPTADO'})
+    } catch (error) {
+      pino.erro("ERROR AL SOLICITAR ADMIN")
+      throw error
+    }
   }
-})
+);
+router.post("/login", async (req, res) => {
+  try {
+    const { email, password } = req.body;
+    pino.error(req.body);
+    const resp = await UserService.login({ email, password });
+    return sendRes(res, resp);
+  } catch (error) {
+    pino.error(error);
+  }
+});
 /*
 router.post(
   '/',
