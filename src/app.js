@@ -28,5 +28,5 @@ app.set('PORT', process.env.port || 3000);
 app.get('/', (_, res) => {
   res.send(`${Messages.INDEX.MSG.HELLO_WORLD} v${Constants.API_VERSION}`);
 });
-app.use('/users', UserRoutes);
+app.use('/api/users', UserRoutes);
 module.exports = app;

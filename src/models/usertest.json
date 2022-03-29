@@ -1,0 +1,15 @@
+{
+	"nombres":"juan1",
+	"apellidos":"perez1",
+	"email":"juan21@gmail.com",
+	"password":"1234",
+	"pais":"EL Salvador",
+	"departamento":"San salvador",
+	"municipio":"ilopango",
+	
+	"genero":"Masculino",	
+	"fecha_nacimiento":"24/10/1995",	
+	
+	"telefono":62482566
+	
+}

@@ -8,7 +8,7 @@ const { MONGO_PASSWORD } = process.env;
 const { EMPLOYMENT_SERVER_MONGO_DB } = process.env;
 
 const { ENABLE_INSECURE_ENDPOINTS } = process.env;
-
+const {SERVER_PRIVATE_KEY}=process.env;
 const { ADDRESS } = process.env;
 const { PORT } = process.env;
 const { FULL_URL } = process.env;
@@ -21,13 +21,14 @@ const MONGO_URL = `${MONGO_DIR}:${MONGO_PORT}/${EMPLOYMENT_SERVER_MONGO_DB}`;
 const MONGO_LOCAL_URL = `${EMPLOYMENT_SERVER_MONGO_DIR_LOCAL}${EMPLOYMENT_SERVER_MONGO_LOCAL}/${EMPLOYMENT_SERVER_MONGO_DB}`;
 
 const USER_TYPES = {
+  Candidate: "Candidate",
   // Permisos para Usuarios
   Read_Users: "Read_Users",
   Write_Users: "Write_Users",
   Delete_Users: "Delete_Users",
 };
 
-const { Admin } = USER_TYPES;
+const { Candidate } = USER_TYPES;
 
 const STATUS = {};
 const CERT_FIELD_TYPES = {
@@ -64,6 +65,8 @@ module.exports = {
   ADDRESS,
   FULL_URL,
   HASH_SALT,
+  SERVER_PRIVATE_KEY,
+  EMPLOYMENT_SERVER_MONGO_DB,
   ENABLE_INSECURE_ENDPOINTS,
   MONGO_LOCAL_URL,
 };
