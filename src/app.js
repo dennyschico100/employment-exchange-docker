@@ -1,30 +1,35 @@
-require('dotenv').config();
-const express = require('express');
-const cors = require('cors');
-const morgan = require('morgan');
-const mongoose = require('mongoose');
 
-const Messages = require('./constants/Messages');
-const Constants = require('./constants/Constants');
-const UserRoutes = require('./routes/UserRoutes');
+const express = require("express");
+const cors = require("cors");
+const morgan = require("morgan");
+const mongoose = require("mongoose");
+require("dotenv").config();
+
+const Messages = require("./constants/Messages");
+const Constants = require("./constants/Constants");
+const UserRoutes = require("./routes/UserRoutes");
+const {log} = require('./utils/logger')
 
 const app = new express();
+
+
 app.use(express.json());
 app.use(cors());
-app.use(morgan('dev'));
+app.use(morgan("dev"));
 mongoose
-  .connect(Constants.MONGO_URL, {
+  .connect(Constants.MONGO_LOCAL_URL, {
     useUnifiedTopology: true,
     useNewUrlParser: true,
   })
-  .then(() => console.log(Messages.INDEX.MSG.CONNECTED))
+  .then(() => log.info(Messages.INDEX.MSG.CONNECTED))
   .catch((err) => {
-    console.log(Messages.INDEX.ERR.CONNECTION + err.message);
+    log.warn(Constants.MONGO_URL);
+    log.error(Messages.INDEX.ERR.CONNECTION + err.message);
   });
 
-app.set('PORT', process.env.port || 3000);
-app.get('/', (_, res) => {
+app.set("PORT", process.env.port || 3000);
+app.get("/", (_, res) => {
   res.send(`${Messages.INDEX.MSG.HELLO_WORLD} v${Constants.API_VERSION}`);
 });
-app.use('/users', UserRoutes);
+app.use("/users", UserRoutes);
 module.exports = app;

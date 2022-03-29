@@ -1,4 +1,4 @@
-const log = require('pino')();
+const {log} = require('./utils/logger');
 const app = require('./app');
 const Messages = require('./constants/Messages');
 
