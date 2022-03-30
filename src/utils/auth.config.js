@@ -1,4 +1,3 @@
-module.exports={
-    secret:"jobs-secret-key"
-    
+module.exports = {
+  secret: 'jobs-secret-key',
 };

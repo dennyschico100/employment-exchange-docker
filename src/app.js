@@ -7,7 +7,7 @@ const mongoose = require('mongoose');
 const Messages = require('./constants/Messages');
 const Constants = require('./constants/Constants');
 const UserRoutes = require('./routes/UserRoutes');
-const {log} = require('./utils/logger');
+const { log } = require('./utils/logger');
 
 const app = new express();
 app.use(express.json());
@@ -20,7 +20,6 @@ mongoose
   })
   .then(() => log.info(Messages.INDEX.MSG.CONNECTED))
   .catch((err) => {
-    (Constants.MONGO_URL);
     log.error(Messages.INDEX.ERR.CONNECTION + err.message);
   });
 

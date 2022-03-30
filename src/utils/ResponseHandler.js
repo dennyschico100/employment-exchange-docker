@@ -1,5 +1,5 @@
 const Constants = require('../constants/Constants');
-
+const { log } = require('./logger');
 class ResponseHandler {
   // mandar respuesta html generica
   static sendHtml(res, data) {
@@ -24,7 +24,7 @@ class ResponseHandler {
   // mandar respuesta de error generica
   static sendErr(res, err) {
     if (Constants.DEBUGG)
-      console.log({
+      log.info({
         status: 'error',
         data: err,
       });
@@ -37,7 +37,7 @@ class ResponseHandler {
   // mandar respuesta de error generica
   static sendErrWithStatus(res, err, status = 500) {
     if (Constants.DEBUGG)
-      console.log({
+      log.error({
         status: 'error',
         data: err,
       });

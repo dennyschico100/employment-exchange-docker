@@ -62,7 +62,7 @@
     "flowtype/define-flow-type": "warn",
     "flowtype/use-flow-type": "warn",
     "global-require": "off",
-    "linebreak-style": "off",
+    "linebreak-style": "on",
     "operator-linebreak": "off"
 
   }
