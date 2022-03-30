@@ -90,10 +90,6 @@ module.exports = {
         code: 'USER_GET',
         message: 'El usuario no pudo ser obtenido.',
       }),
-      SET_NAME: new CodeError({
-        code: 'DELEGATE_SET_NAME',
-        message: 'El delegado no pudo ser verificado.',
-      }),
       GET_NAME: new CodeError({
         code: 'USER_GET_NAME',
         message: 'El nombre del usuario no pudo ser obtenido.',

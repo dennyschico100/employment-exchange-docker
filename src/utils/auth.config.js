@@ -1,3 +1,7 @@
+require('dotenv').config();
+
+const {EMPLOYMENT_API_KEY}= process.env
+
 module.exports = {
-  secret: 'jobs-secret-key',
+  secret: EMPLOYMENT_API_KEY,
 };

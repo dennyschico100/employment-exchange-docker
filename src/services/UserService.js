@@ -10,7 +10,7 @@ module.exports.login = async ({ email, password }) => {
   try {
     _user = await UserModel.getByEmail(email);
 
-    log.info("en el login del user service");
+    
 
     if (!_user) {
       throw USER.ERR.INVALID_USER;
@@ -22,7 +22,6 @@ module.exports.login = async ({ email, password }) => {
   try {
     const isMatch = await _user.comparePassword(password);
     if (!isMatch) {
-      log.error("PASSWORD DOES NOT MATCH");
 
       throw USER.ERR.INVALID_USER;
     }
