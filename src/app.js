@@ -7,20 +7,21 @@ const mongoose = require('mongoose');
 const Messages = require('./constants/Messages');
 const Constants = require('./constants/Constants');
 const UserRoutes = require('./routes/UserRoutes');
+const {log} = require('./utils/logger');
 
 const app = new express();
 app.use(express.json());
 app.use(cors());
 app.use(morgan('dev'));
 mongoose
-  .connect('mongodb://localhost:27017/employmentdblocal', {
+  .connect(`${Constants.MONGO_URL_LOCAL}`, {
     useUnifiedTopology: true,
     useNewUrlParser: true,
   })
-  .then(() => console.log(Messages.INDEX.MSG.CONNECTED))
+  .then(() => log.info(Messages.INDEX.MSG.CONNECTED))
   .catch((err) => {
-    console.log(Constants.MONGO_URL);
-    console.log(Messages.INDEX.ERR.CONNECTION + err.message);
+    (Constants.MONGO_URL);
+    log.error(Messages.INDEX.ERR.CONNECTION + err.message);
   });
 
 app.set('PORT', process.env.port || 3000);

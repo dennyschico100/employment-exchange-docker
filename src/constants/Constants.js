@@ -1,9 +1,15 @@
+require('dotenv').config();
+
 const DEBUGG = process.env.DEBUGG_MODE;
 const { MONGO_DIR } = process.env;
 const { MONGO_PORT } = process.env;
 const MONGO_USER = process.env.MONGO_USERNAME;
 const { MONGO_PASSWORD } = process.env;
 const { MONGO_DB } = process.env;
+
+
+const { EMPLOYMENT_SERVER_MONGO_DIR_LOCAL } = process.env;
+const { EMPLOYMENT_SERVER_MONGO_DB_LOCAL } = process.env;
 
 const { ENABLE_INSECURE_ENDPOINTS } = process.env;
 const {SERVER_PRIVATE_KEY}=process.env;
@@ -13,6 +19,10 @@ const { FULL_URL } = process.env;
 const { HASH_SALT } = process.env;
 const {EMPLOYMENT_SERVER_MONGO_DB}= process.env
 const MONGO_URL = `${MONGO_DIR}:${MONGO_PORT}/${MONGO_DB}`;
+
+const MONGO_URL_LOCAL = `${EMPLOYMENT_SERVER_MONGO_DIR_LOCAL}/${EMPLOYMENT_SERVER_MONGO_DB_LOCAL}`;
+
+
 
 const USER_TYPES = {
   Candidate: "Candidate",
@@ -54,6 +64,7 @@ module.exports = {
   },
 
   MONGO_URL,
+  MONGO_URL_LOCAL,
   PORT,
   ADDRESS,
   FULL_URL,
