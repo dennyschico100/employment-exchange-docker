@@ -7,6 +7,7 @@ const mongoose = require('mongoose');
 const Messages = require('./constants/Messages');
 const Constants = require('./constants/Constants');
 const UserRoutes = require('./routes/UserRoutes');
+const OfferRoutes = require('./routes/OfferRoute')
 const { log } = require('./utils/logger');
 
 const app = new express();
@@ -28,4 +29,5 @@ app.get('/', (_, res) => {
   res.send(`${Messages.INDEX.MSG.HELLO_WORLD} v${Constants.API_VERSION}`);
 });
 app.use('/api/users', UserRoutes);
+app.use('/api/offers',OfferRoutes)
 module.exports = app;

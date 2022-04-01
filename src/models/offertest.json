@@ -1,0 +1,22 @@
+{
+	"nombre_empresa":"Empresa1 ",
+	"titulo_oferta":"Programador java presencial",
+	"cargo_solicitado":"Programador java",
+	"vacantes":4,
+	"tipo_contratacion":"Tiempo completo",
+	"tiempo_experiencia":"2 years",
+	"genero":"Masculino",	
+	"edad":"24/10/1995",	
+	"salario_minimo":600,
+	"salario_maximo":1000,
+	"vehiculo":"si",
+    "pais":"EL Salvador",
+    "departamento":"San Salvador",
+    "estato":1,
+    "expiracion":"2018-07-14",
+    "area_empresa":"Desarrollo software",
+    "modalidad":"remoto"
+
+
+
+}

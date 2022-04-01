@@ -1,10 +1,10 @@
-const { Schema, model } = require("mongoose");
-const bcrypt = require("bcryptjs");
-const Hashing = require("./utils/Hashing");
-const HashedData = require("./utils/HashedData");
-const {pino}= require('../utils/logger')
+const { Schema, model } = require('mongoose');
+const bcrypt = require('bcryptjs');
+const Hashing = require('./utils/Hashing');
+const HashedData = require('./utils/HashedData');
+const { pino } = require('../utils/logger');
 
-const Messages = require("../constants/Messages")
+const Messages = require('../constants/Messages');
 const userSchema = new Schema({
   nombres: { type: String },
   apellidos: { type: String },
@@ -19,7 +19,7 @@ const userSchema = new Schema({
   telefono: { type: Number },
   fecha_nacimiento: { type: String },
   isCandidate: { type: Boolean },
-  
+
   deleted: { type: Boolean, default: false },
 });
 userSchema.statics.encryptPassword = async (password) => {
@@ -32,29 +32,26 @@ userSchema.statics.encryptPassword = async (password) => {
   return valid_password;
 };*/
 
-userSchema.methods.comparePassword = async function(candidatePassword) {
-	try {
-		const result = await Hashing.validateHash(candidatePassword, this.password);
-		return result;
-	} catch (err) {
-		console.log(`[UserSchema - comparePassword]: JSON.stringify(err)`);
-		throw err;
-	}
+userSchema.methods.comparePassword = async function (candidatePassword) {
+  try {
+    const result = await Hashing.validateHash(candidatePassword, this.password);
+    return result;
+  } catch (err) {
+    console.log(`[UserSchema - comparePassword]: JSON.stringify(err)`);
+    throw err;
+  }
 };
 
-
-const UserModel = model("User", userSchema);
+const UserModel = model('User', userSchema);
 module.exports = UserModel;
 
-
-UserModel.getByEmail = async function(email) {
-	try {
-		const res = await UserModel.findOne({ email, deleted: false });
-		return res;
-	} catch (err) {
-		pino.info(`[User - getByName]: JSON.stringify(err)`);
-		throw err;
-	}
+UserModel.getByEmail = async function (email) {
+  try {
+    const res = await UserModel.findOne({ email, deleted: false });
+    return res;
+  } catch (err) {
+    throw new Error(err);
+  }
 };
 
 UserModel.generate = async ({
@@ -88,7 +85,7 @@ UserModel.generate = async ({
     user.fecha_nacimiento = fecha_nacimiento;
 
     user.telefono = telefono;
-    user.isCandidate=isCandidate;
+    user.isCandidate = isCandidate;
     user = await user.save();
     return user;
   } catch (error) {

@@ -2,7 +2,8 @@
   "env": {
     "browser": true,
     "commonjs": true,
-    "es2021": true
+    "es2021": true,
+    "node": true
   },
   "extends": ["airbnb-base"],
   "parserOptions": {
@@ -12,10 +13,10 @@
     "no-restricted-syntax": "off",
     "no-await-in-loop": "off",
     "func-names": "off",
-    "no-console": "off",
+    "no-console": "warn",
     "camelcase": "off",
     "no-nested-ternary": "off",
-    "no-case-declarations": "off",
+    "no-case-declarations": "warn",
     "new-cap": "off",
     "arrow-parens": "off",
     "consistent-return": "off",
@@ -26,8 +27,8 @@
     "import/no-dynamic-require": "off",
     "import/prefer-default-export": "off",
     "no-use-before-define": "off",
-    "promise/param-names": "warn",
-    "promise/catch-or-return": "warn",
+    "promise/param-names": "off",
+    "promise/catch-or-return": "off",
     "promise/no-native": "off",
     "jsx-a11y/label-has-associated-control": "off",
     "class-methods-use-this": "off",
@@ -62,8 +63,8 @@
     "flowtype/define-flow-type": "warn",
     "flowtype/use-flow-type": "warn",
     "global-require": "off",
-    "linebreak-style": "on",
-    "operator-linebreak": "off"
+    "operator-linebreak": "off",
+    "linebreak-style": ["off", "windows"]
 
   }
 }
