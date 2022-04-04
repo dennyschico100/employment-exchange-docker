@@ -17,7 +17,7 @@ router.post('/', async (req, res) => {
     log.info(jobOffer);
     return sendRes(res, { message: 'oferta agregada' });
   } catch (error) {
-    sendErr(error);
+    return sendErr(error);
   }
 });
 

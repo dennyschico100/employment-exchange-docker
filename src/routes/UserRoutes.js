@@ -1,15 +1,12 @@
 const router = require('express').Router();
 const Constants = require('../constants/Constants');
 const Validator = require('../utils/Validator');
-const UserModel = require('../models/User');
 const UserService = require('../services/UserService');
 const { log } = require('../utils/logger');
 
-const { sendRes, sendErrWithStatus, sendErr } = require('../utils/ResponseHandler');
+const { sendRes, sendErr } = require('../utils/ResponseHandler');
 
 router.get('/', (req, res) => {
-  
-
   res.json({ message: 'all users' });
 });
 
@@ -19,7 +16,9 @@ router.post(
     {
       name: 'nombres',
       validate: [Constants.VALIDATION_TYPES.IS_STRING],
+      // eslint-disable-next-line no-dupe-keys
       name: 'email',
+      // eslint-disable-next-line no-dupe-keys
       validate: [Constants.VALIDATION_TYPES.IS_EMAIL],
     },
   ]),
@@ -27,7 +26,6 @@ router.post(
   async (req, res) => {
     try {
       const newUser = {
-    
         nombres: req.body.nombres,
         apellidos: req.body.apellidos,
         email: req.body.email,
@@ -40,16 +38,15 @@ router.post(
         telefono: req.body.telefono,
         isCandidate: true,
       };
+      log.info('saving a new user');
       log.info(newUser);
-
       const result = await UserService.create(newUser);
       return sendRes(res, result);
     } catch (error) {
-      console.log(error);
       log.error(error);
       return sendErr(res, error);
     }
-  }
+  },
 );
 router.get(
   '/admin',
@@ -68,7 +65,7 @@ router.get(
       log.erro('ERROR AL SOLICITAR ADMIN');
       throw error;
     }
-  }
+  },
 );
 router.post('/login', async (req, res) => {
   try {
@@ -77,6 +74,7 @@ router.post('/login', async (req, res) => {
     return sendRes(res, resp);
   } catch (error) {
     log.error(error);
+    return sendErr(res, error);
   }
 });
 /*

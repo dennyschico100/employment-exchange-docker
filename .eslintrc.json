@@ -10,61 +10,17 @@
     "ecmaVersion": 12
   },
   "rules": {
-    "no-restricted-syntax": "off",
-    "no-await-in-loop": "off",
-    "func-names": "off",
-    "no-console": "warn",
-    "camelcase": "off",
-    "no-nested-ternary": "off",
-    "no-case-declarations": "warn",
-    "new-cap": "off",
-    "arrow-parens": "off",
-    "consistent-return": "off",
-    "comma-dangle": "off",
-    "generator-star-spacing": "off",
-    "import/no-unresolved": "error",
-    "import/no-extraneous-dependencies": "off",
-    "import/no-dynamic-require": "off",
-    "import/prefer-default-export": "off",
-    "no-use-before-define": "off",
-    "promise/param-names": "off",
-    "promise/catch-or-return": "off",
-    "promise/no-native": "off",
-    "jsx-a11y/label-has-associated-control": "off",
-    "class-methods-use-this": "off",
-    "no-duplicate-imports": "error",
-    "one-var": [2, {
-    "var": "always", // Exactly one var declaration per function
-    "let": "always", // Exactly one let declaration per block
-    "const": "never" // Exactly one declarator per const declaration per block
-}],
-    "no-param-reassign": "error",
-    "no-plusplus": "off",
-    "no-bitwise": "off",
-    "no-underscore-dangle": "off",
-    "no-mixed-operators": "off",
-    "prefer-template": "warn",
-    "no-unused-vars": ["warn", { "varsIgnorePattern": "^_" }],
-    "no-trailing-spaces": "warn",
-    "padded-blocks": "warn",
-    "no-undef": "error",
-    "arrow-body-style": "warn",
-    "key-spacing": "warn",
-    "no-empty-function": "warn",
-    "no-useless-escape": "warn",
-    "prefer-const": "warn",
-    "object-curly-spacing": "warn",
-    "spaced-comment": "warn",
-    "quotes": ["error", "single", { "avoidEscape": true }],
-    "import/imports-first": "warn",
-    "no-multi-spaces": "warn",
-    "no-multiple-empty-lines": "off",
-    "indent": ["off", "tab", { "SwitchCase": 2 }],
-    "flowtype/define-flow-type": "warn",
-    "flowtype/use-flow-type": "warn",
-    "global-require": "off",
-    "operator-linebreak": "off",
-    "linebreak-style": ["off", "windows"]
-
+    "no-var": "error",
+    "semi": "error",
+    "indent": "error",
+    "no-multi-spaces": "error",
+    "space-in-parens": "error",
+    "no-multiple-empty-lines": "error",
+    "prefer-const": "error",
+    "no-use-before-define": "warn",
+    "linebreak-style": ["error", "windows"]    
   }
 }
+/*,
+    "comma-dangle": ["error", "never"]
+    */
